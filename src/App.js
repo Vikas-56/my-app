@@ -1,9 +1,10 @@
 import './App.css';
-// import About from './Components/About';
+import About from './Components/About';
 import Navbar from './Components/Navbar';
 import TextForm from './Components/TextForm';
 import { useState } from 'react';
 import Alert from './Components/Alert';
+import {BrowserRouter as Router,Route,Routes} from 'react-router-dom'
 
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
      }) 
      setTimeout(() => {
       setAlert(null)
-     }, 1500);
+     }, 2000);
     }
 
   const toggleMode = () => { 
@@ -35,13 +36,29 @@ function App() {
 
   return (
     <>
-  
-      <Navbar title='VikasMeena' AboutText='New One' mode={Mode} toggleMode={toggleMode}/>
+      
+    <Router>
+      
+
+      <Navbar title="TextUtils" AboutText="About" mode={Mode} toggleMode={toggleMode}/>
       <Alert alert={alert}/>
-      <div className='container my-3'>
-        <TextForm heading='Enter your feedback here:-' mode={Mode} showAlert={showAlert}/>
-        {/* <About/> */}
-        </div>
+      <div className="container my-3">
+               
+          <Routes>
+            <Route exact path="/about" element={<About/>} >
+
+            </Route>
+
+            <Route exact path="/" element={<TextForm showAlert={showAlert} heading="Enter your text to Analyse below" mode={Mode}/>}>
+
+            </Route>
+          </Routes>
+
+
+      </div>
+
+
+      </Router>
       
     </>
   );

@@ -5,37 +5,45 @@ export default function TextForm(props) {
 
     const [text,setText] = useState('');
     const handleUpClick = ()=>{
-        console.log("Uppercase was clicked");
         let newText= text.toUpperCase();
         setText(newText);
         props.showAlert("Converted to uppercase","success")
     }
 
     const handleLoClick = ()=>{
-        console.log("Uppercase was clicked");
         let newText= text.toLowerCase();
         setText(newText);
         props.showAlert("Converted to lowercase","success")
 
     }
 
+    const handleCleartext = ()=>{
+        let newText= '';
+        setText(newText);
+        props.showAlert("Text area is cleared","success")
+
+    }
+    
     const handleOnChange = (event)=>{
     
         setText(event.target.value);
-       
+          
     }
-
-    const countword = () => { 
-        let xx=0;
-        if(text===null){
-            xx === 0;
-            
+    const countword = (str) => { 
+        let xx;
+        if(text===""){
+            xx = 0;
         }
         else{
-            xx=word.split(' ').length
+            xx=str.trim().split(/\s+/).length
         }
+        console.log('xx');
         return xx;
      }
+
+     
+
+
 
 
   return (
@@ -48,10 +56,15 @@ export default function TextForm(props) {
             id="mybox" rows="8"></textarea>
         </div>
         <button className="btn btn-primary mx-1" onClick={handleUpClick}>Convert to Uppercase</button>
-        <button className="btn btn-primary" onClick={handleLoClick}>Convert to Lowecase</button>
+        <button className="btn btn-primary mx-1" onClick={handleLoClick}>Convert to Lowecase</button>
+        <button className="btn btn-primary" onClick={handleCleartext}>Reset</button>
         <div className="container my-2">
             <h2> Your text summary</h2>
             <p>{countword.text} words and {text.length} characters</p> 
+
+            <p>{text.length<1?0:text.split(' ').length} words and {text.length} characters</p> 
+
+            
             <h3>Preview</h3>
             <p>{text.length>0?text:"Enter something in the textbox above to preview it here"}</p>
         </div>
