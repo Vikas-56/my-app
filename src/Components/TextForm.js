@@ -45,7 +45,7 @@ export default function TextForm(props) {
         <button  disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleCleartext}>Reset</button>
         <div className="container my-2">
             <h2> Your text summary</h2>
-            <p>{text.split(' ').filter((element)=>{return element.length!==0}).length} words and {text.length} characters</p> 
+            <p>{text.split(/\s+/).filter((element)=>{return element.length!==0}).length} words and {text.length} characters</p> 
             <h3>Preview</h3>
             <p>{text.length>0?text:"Enter something in the textbox above to preview it here"}</p>
         </div>
